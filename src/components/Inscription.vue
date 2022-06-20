@@ -12,7 +12,7 @@ function onSubmit(values) {
 
   return authStore
     .register(email.value, username.value, password.value)
-    .catch((error) => setErrors({ apiError: error }));
+    .catch((error) => console.log({ apiError: error }));
 }
 </script>
 

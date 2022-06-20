@@ -1,3 +1,11 @@
-<script setup></script>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "../stores";
 
-<template><h1>Accueil</h1></template>
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
+</script>
+
+<template>
+  <h1>{{ user ? `Bonjour ${user?.username}!` : `Bonjour Anonyme!` }}</h1>
+</template>

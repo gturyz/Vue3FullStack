@@ -22,11 +22,16 @@ export const useAuthStore = defineStore({
       router.push(this.returnUrl || "/connexion");
     },
     async login(email, password) {
-      const user = await axios.post(`${baseUrl}/signin`, {
-        email,
-        password,
-      });
-
+      const user = await axios
+        .post(`${baseUrl}/signin`, {
+          email,
+          password,
+        })
+        .then((res) => {
+          return res.data;
+        });
+      // .then((res) => {
+      // console.log(res);
       // update pinia state
       this.user = user;
 
@@ -35,6 +40,7 @@ export const useAuthStore = defineStore({
 
       // redirect to previous url or default to home page
       router.push(this.returnUrl || "/");
+      // });
     },
     logout() {
       this.user = null;
