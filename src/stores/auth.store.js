@@ -30,8 +30,6 @@ export const useAuthStore = defineStore({
         .then((res) => {
           return res.data;
         });
-      // .then((res) => {
-      // console.log(res);
       // update pinia state
       this.user = user;
 
@@ -40,12 +38,11 @@ export const useAuthStore = defineStore({
 
       // redirect to previous url or default to home page
       router.push(this.returnUrl || "/");
-      // });
     },
     logout() {
       this.user = null;
       localStorage.removeItem("user");
-      router.push("/login");
+      router.push("/connexion");
     },
   },
 });
