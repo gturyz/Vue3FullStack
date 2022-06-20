@@ -46,8 +46,13 @@ const { user } = storeToRefs(authStore);
             >
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'Hasard' }"
+              >Au hasard</router-link
+            >
+          </li>
+          <li class="nav-item" v-if="user">
             <router-link class="nav-link" :to="{ name: 'List' }"
-              >Todolists</router-link
+              >CRUD</router-link
             >
           </li>
         </div>
