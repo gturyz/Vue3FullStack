@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "../stores";
+
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
+</script>
 
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
@@ -21,12 +27,15 @@
               >Accueil</router-link
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="!user">
             <router-link class="nav-link" :to="{ name: 'Inscription' }"
               >Inscription</router-link
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="user">
+            <a class="nav-link" @click="authStore.logout">Deconnexion</a>
+          </li>
+          <li class="nav-item" v-if="!user">
             <router-link class="nav-link" :to="{ name: 'Connexion' }"
               >Connexion</router-link
             >
@@ -37,8 +46,13 @@
             >
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'Hasard' }"
+              >Au hasard</router-link
+            >
+          </li>
+          <li class="nav-item" v-if="user">
             <router-link class="nav-link" :to="{ name: 'List' }"
-              >Todolists</router-link
+              >CRUD</router-link
             >
           </li>
         </div>

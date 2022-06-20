@@ -1,13 +1,23 @@
 <script setup>
 import { ref } from "vue";
 
+import { useAuthStore } from "../stores";
+
 const email = ref("");
 const password = ref("");
+
+function onSubmit(values) {
+  const authStore = useAuthStore();
+
+  return authStore
+    .login(email.value, password.value)
+    .catch((error) => console.log(error));
+}
 </script>
 
 <template>
   <h1>Connexion</h1>
-  <form>
+  <form @submit.prevent="onSubmit">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
       <input
